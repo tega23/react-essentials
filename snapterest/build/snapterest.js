@@ -18746,26 +18746,31 @@ if (process.env.NODE_ENV !== 'production') {
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var listOfItems = React.createElement(
-  'ul',
-  { className: 'list-of-items' },
-  React.createElement(
-    'li',
-    { className: 'item-1' },
-    'Item 1'
-  ),
-  React.createElement(
-    'li',
-    { className: 'item-2' },
-    'Item 2'
-  ),
-  React.createElement(
-    'li',
-    { className: 'item-3' },
-    'Item 3'
-  )
-);
+var ReactClass = React.createClass({
+    displayName: 'ReactClass',
 
-ReactDOM.render(listOfItems, document.getElementById('react-application'));
+    getInitialState: function getInitialState() {
+        return {
+            isHeaderHidden: false
+
+        };
+    },
+    handleClick: function handleClick() {
+        this.setState({
+            isHeaderHidden: !this.state.isHeaderHidden
+        });
+    },
+    render: function render() {
+        var title = 'Stateful React Component';
+        var headerElement = React.createElement('h1', { className: 'header', key: 'header' }, title);
+        var buttonElement = React.createElement('button', { className: 'btn btn-default', onClickCapture: this.handleClick, key: 'button' }, 'Toggleheader');
+        if (this.state.isHeaderHidden) {
+            return React.createElement('div', null, [buttonElement]);
+        }
+        return React.createElement('div', null, [buttonElement, headerElement]);
+    }
+});
+var reactComponentElement = React.createElement(ReactClass);
+var reactComponent = ReactDOM.render(reactComponentElement, document.getElementById('react-application'));
 
 },{"react":155,"react-dom":28}]},{},[156]);
