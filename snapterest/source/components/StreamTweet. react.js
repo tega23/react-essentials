@@ -56,12 +56,18 @@ var StreamTweet = React.createClass({
         console.log('[Snapterest] StreamTweet: 5. Running shouldComponentUpdate()');
         return (nextProps.tweet.text.length > 1);
     },
-
+    componentWillUpdate: function (nextProps, nextState) {
+        console.log('[Snapterest] StreamTweet: 6. Running componentWillUpdate()');
+    },
+    componentDidUpdate: function (prevProps, prevState) {
+        console.log('[Snapterest] StreamTweet: 7. Running componentDidUpdate()');
+        window.snapterest.numberOfDisplayedTweets++;
+    },
     componentWillUnmount: function () {
         console.log('[Snapterest] StreamTweet: 8. Running componentWillUnmount()');
         delete window.snapterest;
     },
-
+    
     render: function () {
         console.log('[Snapterest] StreamTweet: Running render()');
         return (
